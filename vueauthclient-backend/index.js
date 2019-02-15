@@ -9,6 +9,8 @@ const localStrategy=require("passport-local").Strategy;
 
 const ControllerContact = require('./controller/controllerContact');
 
+const ControllerChambres = require("./controller/controllerChambre");
+
 // app.use(function(req,res,next){
 //   console.log(req.originalUrl)
 //   next()
@@ -42,6 +44,8 @@ let users=[
 ]
 
 app.get('/api/contact', ControllerContact.getContact);
+
+app.get('/api/chambres', ControllerChambres.getChambre);
 
 app.post("/api/login",(req,res,next)=>{
   passport.authenticate("local", (err, user, info)=>{

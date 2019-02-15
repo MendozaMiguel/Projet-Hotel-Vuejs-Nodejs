@@ -4,7 +4,8 @@
       <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>    
       <router-link :to="{ name: 'Login'}">Login</router-link>
       <router-link :to="{ name: 'Contact'}">Contact</router-link>  
-      <router-link :to="{ name: 'Chambres'}">Chambres</router-link>  
+      <router-link :to="{ name: 'Chambres'}">Chambres</router-link>
+      <router-link :to="{ name:'Reservation'}">Reservation</router-link>
       <a href="#" v-on:click="logout">Logout</a>    
     </div>    
     <router-view/> 

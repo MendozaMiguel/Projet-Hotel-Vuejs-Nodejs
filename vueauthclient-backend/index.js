@@ -7,31 +7,12 @@ const passport=require("passport");
 
 const localStrategy=require("passport-local").Strategy;
 
+const ControllerContact = require('./controller/controllerContact');
 
-// MYSQL CONNECTION + REQUETES
-const mysql=require('mysql');
-
-const con = mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:'root',
-  database:'authentification'
-})
-
-con.connect(function(err){
-  if(err) throw err;
-  console.log('connected to BDD');
-})
-
-let myreq="Select * from users";
-
-let test = con.query(myreq,function(err,result,fields){
-  if(err) throw err;
-  console.log(result)
-});
-
-// MYSQL CONNECTION + REQUETES
-
+// app.use(function(req,res,next){
+//   console.log(req.originalUrl)
+//   next()
+// })
 
 app.use(bodyParser.json());
 
@@ -59,6 +40,8 @@ let users=[
     password:"password2"
   }
 ]
+
+app.get('/api/contact', ControllerContact.getContact);
 
 app.post("/api/login",(req,res,next)=>{
   passport.authenticate("local", (err, user, info)=>{
@@ -95,7 +78,7 @@ app.get('/api/user',authMiddleware,(req,res)=>{
   let user= users.find(user =>{
     return user.id === req.session.passport.user
   })
-  console.log([user,req.session]);
+  // console.log([user,req.session]);
   res.send({user:user})
 })
 
@@ -114,7 +97,7 @@ passport.use(
         return user.email === username && user.password === password
       })
 
-      console.log(user)
+      // console.log(user)
 
       if (user) {
         done(null, user)
@@ -137,7 +120,7 @@ passport.deserializeUser((id, done) => {
   done(null, user)
 })
 
-const publicRoot = 'C:/Users/admin/Desktop/VueJS tuto/vueauthclient/vueauthclient/dist'
+const publicRoot = 'C:/Users/admin/Desktop/VueJS tuto/authentification-vuejs-nodejs-mysql/vueauthclient/dist'
 
 app.use(express.static(publicRoot))  
 

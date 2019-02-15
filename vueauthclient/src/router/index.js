@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import Contact from '@/components/Contact'
 import Chambres from '@/components/Chambres'
+import Reservation from '@/components/Reservation'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path:'/chambres',
       name: 'Chambres',
       component: Chambres
+    },
+    {
+      path:'/reservation',
+      name:'Reservation',
+      component: Reservation
     }
   ]
 })

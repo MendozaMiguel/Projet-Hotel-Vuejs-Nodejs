@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="chambre in chambres">
+    <div v-for="chambre in chambres" :key="chambre.id">
       <div>{{chambre.id}}</div>
       <div>{{chambre.name}}</div>
       <div>{{chambre.description}}</div>

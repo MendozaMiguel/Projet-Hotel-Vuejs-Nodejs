@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Contact</h2>
-    <div  v-for="result in resultat">
+    <div  v-for="result in resultat" :key="result.id">
     <p>adresse : {{result.adresse}}</p>
     <p>civilite : {{result.civilite}}</p>
     <p>cp : {{result.cp}}</p>
@@ -27,16 +27,17 @@ export default {
   data(){
     return{
       resultat:{
-      adresse: 'myadress',
-      civilite: 'M/F',
-      cp: 12345,
-      email: 'myemai@exemple.com',
-      message: 'mymessage',
-      nom: 'mylastname',
-      prenom: 'myfirstname',
-      societe: 'society',
-      tel: 123456789,
-      ville: 'city'
+        id:1,
+        adresse: 'myadress',
+        civilite: 'M/F',
+        cp: 12345,
+        email: 'myemai@exemple.com',
+        message: 'mymessage',
+        nom: 'mylastname',
+        prenom: 'myfirstname',
+        societe: 'society',
+        tel: 123456789,
+        ville: 'city'
       }
     }
   },

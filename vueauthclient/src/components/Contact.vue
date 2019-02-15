@@ -42,9 +42,9 @@ export default {
   },
   methods:{
     getData: function(){
-      let self = this
+      let self = this;
       axios.get("/api/contact")
-      .then((response)=>{
+      .then( response =>{
         console.log(response)
         self.$set(this, "resultat", response.data.resultat)
       })

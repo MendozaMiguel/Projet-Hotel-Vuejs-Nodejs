@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import Contact from '@/components/Contact'
+import Chambres from '@/components/Chambres'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/contact',
       name:'Contact',
       component: Contact
+    },
+    {
+      path:'/chambres',
+      name: 'Chambres',
+      component: Chambres
     }
   ]
 })

@@ -5,12 +5,20 @@ import Dashboard from '@/components/Dashboard'
 import Contact from '@/components/Contact'
 import Chambres from '@/components/Chambres'
 import Reservation from '@/components/Reservation'
+import Index from '@/components/Index'
+import Prix from '@/components/Prix'
+import Noustrouver from '@/components/Noustrouver'
 
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path:'/',
+      name:'Index',
+      component: Index
+    },
     {
       path: '/login',
       name: 'Login',
@@ -32,9 +40,19 @@ export default new Router({
       component: Chambres
     },
     {
+      path:'/prix',
+      name: 'Prix',
+      component: Prix
+    },
+    {
       path:'/reservation',
       name:'Reservation',
       component: Reservation
+    },
+    {
+      path:'/noustrouver',
+      name:'Noustrouver',
+      component: Noustrouver
     }
   ]
 })

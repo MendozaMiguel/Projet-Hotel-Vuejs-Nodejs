@@ -1,28 +1,44 @@
 <template>
   <div>
-    <h1>Période de réservation (*)</h1>
-    <datepicker :language="fr" v-model="vModelExample"></datepicker>
-    <p>{{ vModelExample }}</p>
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col cols="4">Période de réservation (*)</b-col>
+        <b-col>
+          <input type="text" id="startDate" v-model="startDate">
+          <button type="button" class="btn btn-default" @click="test">valider</button>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          Nuits (*) :
+          <select v-model="selected">
+            <option v-for="option in options"  v-bind:value="option.value">{{ option.text }}</option>
+          </select>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
-import {fr} from 'vuejs-datepicker/dist/locale'
-
+import Vue from "vue";
 export default {
-  name:'Reservation',
-  data(){
-    return{
-      fr:fr,
-      vModelExample: null,
+  name: "Reservation",
+  data() {
+    return {
+      startDate: "",
+      selected: "A",
+      options: [
+        { text: "Un", value: "A" },
+        { text: "Deux", value: "B" },
+        { text: "Trois", value: "C" }
+      ]
+    };
+  },
+  methods: {
+    test() {
+      console.log(this.startDate); // the startDate value is ''
     }
-  },
-  components: {
-     'Datepicker' : Datepicker
-  },
-  mounted(){
-    console.log(Datepicker)
   }
-}
+};
 </script>

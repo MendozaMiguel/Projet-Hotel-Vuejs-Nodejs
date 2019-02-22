@@ -11,6 +11,8 @@ const ControllerContact = require('./controller/controllerContact');
 
 const ControllerChambres = require("./controller/controllerChambre");
 
+const reservation = require('./controller/controllerReservation');
+
 // app.use(function(req,res,next){
 //   console.log(req.originalUrl)
 //   next()
@@ -46,6 +48,8 @@ let users=[
 app.get('/api/contact', ControllerContact.getContact);
 
 app.get('/api/chambres', ControllerChambres.getChambre);
+
+app.post('/api/reservation', reservation.ReservationPost);
 
 app.post("/api/login",(req,res,next)=>{
   passport.authenticate("local", (err, user, info)=>{

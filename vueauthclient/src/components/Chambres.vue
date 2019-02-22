@@ -1,23 +1,20 @@
 <template>
-<div>
+  <div id="align-items">
     <div v-for="chambre in chambres" :key="chambre.id">
-      <b-card-group deck>
-    <b-card
-      :title="`${chambre.name}`"
-      :img-src="`../../static/chambres/img_${chambre.image}`"
-      :img-alt="`${chambre.name}`"
-      img-top
-      tag="article"
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
-      <b-card-text>{{chambre.description}}...</b-card-text>
-      <b-button href="#" variant="primary">en savoir +</b-button>
-    </b-card>
-    </b-card-group>
+      <b-card
+        :title="`${chambre.name}`"
+        :img-src="`../../static/chambres/img_${chambre.image}`"
+        :img-alt="`${chambre.name}`"
+        img-top
+        tag="article"
+        style="max-width: 20rem;"
+        class="mb-2"
+      >
+        <b-card-text>{{chambre.description}}...</b-card-text>
+        <b-button href="#" variant="primary">en savoir +</b-button>
+      </b-card>
+    </div>
   </div>
-</div>
-
 
   <!-- <b-row>
       <b-col id="chambres" >
@@ -66,17 +63,11 @@ export default {
 </script>
 
 <style>
-#chambres {
+#align-items {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   align-self: flex-end;
-}
-
-.resize {
-  width: 90%;
-  height: 50vh;
-  align-self: center;
+  justify-content: space-around;
+  align-items: baseline;
 }
 </style>
 

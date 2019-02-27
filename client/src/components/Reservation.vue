@@ -323,6 +323,7 @@ export default {
       this.form.msg = "";
     },
     postReservation: (e)=> {
+       e.preventDefault()
       let self = this.$data;
       // console.log(self)
 

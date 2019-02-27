@@ -47,12 +47,12 @@
         </b-navbar>
       </div>
 
-      <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
+      <!-- <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
       <router-link :to="{ name: 'Login'}">Login</router-link>
       <router-link :to="{ name: 'Contact'}">Contact</router-link>
       <router-link :to="{ name: 'Chambres'}">Chambres</router-link>
       <router-link :to="{ name:'Reservation'}">Reservation</router-link>
-      <a href="#" v-on:click="logout">Logout</a>
+      <a href="#" v-on:click="logout">Logout</a> -->
     </div>
     <router-view/>
   </div>
@@ -73,12 +73,12 @@ export default {
     },
     login:(e)=>{
       e.preventDefault()
-      let email = e.target.elements.email.value
-      let password = e.target.elements.password.value
+      let prenomUtilisateur = e.target.elements.email.value
+      let motDePasseUtilisateur = e.target.elements.password.value
       let login = () => {
         let data = {
-          email : email,
-          password : password,
+          prenom : prenomUtilisateur,
+          motdepasse : motDePasseUtilisateur
         }
         axios.post('/api/login', data)
         .then((response) => {

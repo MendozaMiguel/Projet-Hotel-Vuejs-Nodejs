@@ -12,8 +12,24 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "../router";
+
 export default {
-  name:"Noustrouver"
+  name:"Noustrouver",
+    methods: {
+    getData: function() {
+      axios
+        .get("/api/noustrouver")
+        .then(response => {
+          console.log(response);
+        })
+        .catch(errors => console.log(errors));
+    }
+  },
+  mounted() {
+    this.getData();
+  }
 };
 </script>
 

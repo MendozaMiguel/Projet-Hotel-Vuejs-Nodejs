@@ -15,7 +15,7 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path:'/',
+      path:'/home',
       name:'Index',
       component: Index
     },
@@ -40,7 +40,7 @@ export default new Router({
       component: Chambres
     },
     {
-      path:'/prix',
+      path:'/tarif',
       name: 'Prix',
       component: Prix
     },

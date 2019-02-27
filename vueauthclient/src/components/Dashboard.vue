@@ -1,7 +1,10 @@
 <template>
   <div>
     <h2>Dashboard</h2>
-    <p>Name : {{user.name}}</p>
+    <div v-for="user in users" :key="user.id">
+      <p>ID : {{user.id}}</p>
+      <p>Prenom : {{user.prenom}}</p>
+    </div>
   </div>
 </template>
 
@@ -13,18 +16,19 @@ export default {
   name:'Dashboard',
   data(){
     return{
-      user:{
-        name:'Miguel'
+      users:{
+        id: 1,
+        prenom:'Miguel'
       }
     }
   },
   methods:{
     getUserData: function(){
       let self = this
-      axios.get("/api/user")
+      axios.get("/api/utilisateurs")
       .then((response)=>{
         console.log(response)
-        self.$set(this, "user", response.data.user)
+        self.$set(this, "users", response.data.resultat)
       })
       .catch((errors)=>{
         console.log(errors)

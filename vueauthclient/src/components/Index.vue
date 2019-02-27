@@ -5,7 +5,7 @@
         <b-col>
           <h1>Bienvenue à l'Hôtel de l'Étoile</h1>
         </b-col>
-      </b-row> -->
+      </b-row>-->
       <b-row>
         <b-col>
           <h3>Présentation</h3>
@@ -42,7 +42,25 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import router from "../router";
+
+export default {
+  name: "Index",
+  methods: {
+    getData: function() {
+      axios
+        .get("/api/home")
+        .then(response => {
+          console.log(response);
+        })
+        .catch(errors => console.log(errors));
+    }
+  },
+  mounted() {
+    this.getData();
+  }
+};
 </script>
 
 <style>

@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 function utilisateurGet (req, res) {
-  if (!req.session.admin === true) {
-      res.send('ERROR404')
-  }
+  // if (!req.session.admin === true) {
+  //     res.send('ERROR404')
+  // }
   query.getAll().then(function(resultat, err){
       if (err) throw err;
       res.send({resultat: resultat});
@@ -30,7 +30,7 @@ function postEnregistrement(req, res){
       //On prepare l'insertion avec les '?,?' que l'on remplace juste après avec [prenom,motdepasse]
       query.postEnregistrement(prenom, hash).then(function (resultat, err) {
           if (err) throw err;
-          res.redirect('/utilisateurs');
+          res.redirect('/api/utilisateurs');
       });
   }
 }
@@ -39,7 +39,7 @@ function deleteUser(req, res){
   var idUtlisateurs = req.params.idUtilisateurs;
   query.deleteUser(idUtlisateurs).then(function (resultat, err) {
       if (err) throw err;
-      res.redirect('/utilisateurs');
+      res.redirect('/api/utilisateurs');
   });
 }
 
@@ -57,7 +57,7 @@ function modifyUserPost(req, res){
   let hash = bcrypt.hashSync(motDeDasseUtilisateur, saltRounds);
   query.modifyUserPost(req,hash).then(function (resultat,err,meta) {
       if (err) throw err;
-      res.redirect('/utilisateurs');
+      res.redirect('/api/utilisateurs');
   });
 }
 

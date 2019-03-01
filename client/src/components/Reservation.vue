@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="bv-example-row">
-      <form role="form" action="/api/reservation" method="post" @submit="onSubmit" @reset="onReset">
+      <form role="form" action="/api/reservation" method="post" v-on:submit="postReservation" @reset="onReset">
         <b-row>
           <b-col cols="4">Période de réservation (*)</b-col>
           <b-col>
@@ -25,7 +25,7 @@
             <h3>Type d'hébergement</h3>
             <b-col>
               <b-form-group label="Type :">
-                <b-form-radio-group v-model="form.type" :options="type" name="type"/>
+                <b-form-radio-group v-model="form.typeHeber" :options="typeHeber" name="typeHerber"/>
               </b-form-group>
             </b-col>
           </b-col>
@@ -174,7 +174,7 @@
             <h3>Options supplémentaires</h3>
             <b-col>
               <p>Nombre de petits déjeuners par nuit</p>
-              <select v-model="form.dejeuners" name="nbChambre6">
+              <select v-model="form.dejeuners" name="dej">
                 <option v-for="option in dejeuners" v-bind:value="option.value">{{ option.text }}</option>
               </select>
             </b-col>
@@ -199,7 +199,7 @@
               <b-form-radio-group
                 v-model="form.selectedC"
                 :options="climatisation"
-                name="climatisation"
+                name="Climatisation"
               />
             </b-form-group>
           </b-col>
@@ -228,7 +228,6 @@ export default {
   name: "Reservation",
   data() {
     return {
-      complementAdresse:"",
       nuits: [
         { text: "1", value: 1 },
         { text: "2", value: 2 },
@@ -246,8 +245,6 @@ export default {
       ],
       form: {
         startDate: "2017-06-15 04:00:40"
-        // email: "",
-        // msg: ""
       },
       nbChambre1: [
         { text: "1", value: 1 },
@@ -305,12 +302,12 @@ export default {
         })
         .catch(errors => console.log(errors));
     },
-    onSubmit(evt) {
-      evt.preventDefault();
-      this.postReservation();
-    },
-    onReset(evt) {
-      evt.preventDefault();
+    // onSubmit(e) {
+    //   e.preventDefault();
+    //   this.postReservation();
+    // },
+    onReset(e) {
+      e.preventDefault();
       /* Reset our form values */
       this.form.nom = "";
       this.form.prenom = "";
@@ -323,63 +320,58 @@ export default {
       this.form.msg = "";
     },
     postReservation: (e)=> {
-       e.preventDefault()
-      let self = this.$data;
-      // console.log(self)
+      e.preventDefault()
+      let date = e.target.elements.date.value
+      let nuits = e.target.elements.nuits.value
+      let nbPersonnes = e.target.elements.nbPersonnes.value
+      let typeHerber = e.target.elements.typeHerber.value
+      let nom = e.target.elements.nom.value
+      let prenom = e.target.elements.prenom.value
+      let tel = e.target.elements.tel.value
+      // let email = e.target.elements.email.value
+      let adresse = e.target.elements.adresse.value
+      let complementAdresse = e.target.elements.complementAdresse.value
+      let cp = e.target.elements.cp.value
+      let ville = e.target.elements.ville.value
+      let pays = e.target.elements.pays.value
+      let nbChambre1 = e.target.elements.nbChambre1.value
+      let nbChambre2 = e.target.elements.nbChambre2.value
+      let nbChambre3 = e.target.elements.nbChambre3.value
+      let nbChambre4 = e.target.elements.nbChambre4.value
+      let nbChambre5 = e.target.elements.nbChambre5.value
+      let dej = e.target.elements.dej.value
+      let Balcon = e.target.elements.Balcon.value
+      let Vue = e.target.elements.Vue.value
+      let Climatisation = e.target.elements.Climatisation.value
+      let msg = e.target.elements.msg.value
 
       let postReservation = () => {
-        let nuits = self.form.nuits;
-        let nuit = parseInt(nuits);
-
-        let nbPersonnes = self.form.nbPersonnes;
-        let nbPersonne = parseInt(nbPersonnes);
-
-        let codepostal = self.form.codepostal;
-        let cp = parseInt(codepostal);
-
-        let nbChambre1 = self.form.nbChambre1;
-        let nbChambreA = parseInt(nbChambre1);
-
-        let nbChambre2 = self.form.nbChambre2;
-        let nbChambreB = parseInt(nbChambre2);
-
-        let nbChambre3 = self.form.nbChambre3;
-        let nbChambreC = parseInt(nbChambre3);
-
-        let nbChambre4 = self.form.nbChambre4;
-        let nbChambreD = parseInt(nbChambre4);
-
-        let nbChambre5 = self.form.nbChambre5;
-        let nbChambreE = parseInt(nbChambre5);
-
-        let dejeuners = self.form.dejeuners;
-        let dej = parseInt(dejeuners);
 
         // console.log(typeof(dej))
 
         let data = {
-          datechoisi: self.form.startDate,
+          datechoisi: date,
           nb_nuit: nuits,
           nb_personnes: nbPersonnes,
-          type: self.form.type,
-          nom: self.form.nom,
-          prenom: self.form.prenom,
-          tel: self.form.tel,
-          adresse: self.form.Adresse,
-          comp_adresse: self.form.complementAdresse,
+          type: typeHerber,
+          nom: nom,
+          prenom: prenom,
+          tel: tel,
+          adresse: adresse,
+          comp_adresse: complementAdresse,
           cp: cp,
-          ville: self.form.ville,
-          pays: self.form.pays,
-          chambres1: nbChambreA,
-          chambres2: nbChambreB,
-          chambres3: nbChambreC,
-          chambres4: nbChambreD,
-          chambres5: nbChambreE,
+          ville: ville,
+          pays: pays,
+          chambres1: nbChambre1,
+          chambres2: nbChambre2,
+          chambres3: nbChambre3,
+          chambres4: nbChambre4,
+          chambres5: nbChambre5,
           petitdej: dej,
-          balcon: self.form.selectedA,
-          vue: self.form.selectedB,
-          climatisation: self.form.selectedC,
-          msgcomplementaire: self.form.msg
+          balcon: Balcon,
+          vue: Vue,
+          climatisation: Climatisation,
+          msgcomplementaire: msg
         };
         axios
           .post('/api/reservation', data)

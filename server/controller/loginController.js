@@ -26,11 +26,11 @@ function connexionPost(req, res) {
              if (resCompare === true){
                  req.session.admin = true ;
                  console.log('connecte ok');
-                 res.redirect('/api/utilisateurs');
+                 res.send('/api/utilisateurs');
              }else {
                  req.session.admin = false ;
                  console.log('connecte ko');
-                 res.redirect('/api/login');
+                 res.send('/api/login');
              }
           });
       }else {

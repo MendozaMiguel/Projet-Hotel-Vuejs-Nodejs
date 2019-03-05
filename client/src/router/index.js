@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Dashboard from '@/components/Dashboard'
+import DashboardAdmin from '@/components/DashboardAdmin'
+import DashboardAdminAdd from '@/components/DashboardAdminAdd'
+import DashboardAdminUpdate from '@/components/DashboardAdminUpdate'
 import Contact from '@/components/Contact'
 import Chambres from '@/components/Chambres'
 import Reservation from '@/components/Reservation'
@@ -25,9 +27,20 @@ export default new Router({
       component: Login
     },
     {
-      path: '/dashboard',
-      name:'Dashboard',
-      component: Dashboard
+      path: '/dashboardAdmin',
+      name:'DashboardAdmin',
+      component: DashboardAdmin
+    },
+    {
+      path: '/dashboardAdminUpdate',
+      name:'DashboardAdminUpdate',
+      component: DashboardAdminUpdate,
+      props: true
+    },
+    {
+      path: '/dashboardAdminAdd',
+      name:'DashboardAdminAdd',
+      component: DashboardAdminAdd
     },
     {
       path: '/contact',

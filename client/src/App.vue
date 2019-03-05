@@ -16,14 +16,21 @@
               <b-nav-item :to="{ name: 'Noustrouver'}">Nous trouver</b-nav-item>
               <b-nav-item :to="{ name: 'Contact'}">Contact</b-nav-item>
               <b-nav-item-dropdown text="Admin" right>
-                <b-dropdown-item href="#">Gestion Admin</b-dropdown-item>
+                <b-dropdown-item :to="{name : 'DashboardAdminAdd'}">Add Admin</b-dropdown-item>
+                <b-dropdown-item :to="{name : 'DashboardAdmin'}">Gestion Admin</b-dropdown-item>
                 <b-dropdown-item href="#">Gestion Chambres</b-dropdown-item>
               </b-nav-item-dropdown>
               <!-- Form for login -->
               <b-nav-item-dropdown text="Sign in" right>
                 <b-dropdown-form v-on:submit="login">
                   <b-form-group label="Identifiant" label-for="ddown-form-email">
-                    <b-form-input type="text" name="email" size="sm" placeholder="email@example.com" id="ddown-form-email"></b-form-input>
+                    <b-form-input
+                      type="text"
+                      name="email"
+                      size="sm"
+                      placeholder="email@example.com"
+                      id="ddown-form-email"
+                    ></b-form-input>
                   </b-form-group>
 
                   <b-form-group label="Password" label-for="ddown-form-passwd">
@@ -46,13 +53,6 @@
           </b-collapse>
         </b-navbar>
       </div>
-
-      <!-- <router-link :to="{ name: 'Dashboard'}">Dashboard</router-link>
-      <router-link :to="{ name: 'Login'}">Login</router-link>
-      <router-link :to="{ name: 'Contact'}">Contact</router-link>
-      <router-link :to="{ name: 'Chambres'}">Chambres</router-link>
-      <router-link :to="{ name:'Reservation'}">Reservation</router-link>
-      <a href="#" v-on:click="logout">Logout</a> -->
     </div>
     <router-view/>
   </div>
@@ -71,24 +71,24 @@ export default {
         router.push("/");
       });
     },
-    login:(e)=>{
-      e.preventDefault()
-      let prenomUtilisateur = e.target.elements.email.value
-      let motDePasseUtilisateur = e.target.elements.password.value
+    login: e => {
+      e.preventDefault();
+      let prenomUtilisateur = e.target.elements.email.value;
+      let motDePasseUtilisateur = e.target.elements.password.value;
       let login = () => {
         let data = {
-          prenom : prenomUtilisateur,
-          motdepasse : motDePasseUtilisateur
-        }
-        axios.post('/api/login', data)
-        .then((response) => {
-          console.log("logged in")
-          router.push("/dashboard")
-        })
-        .catch((errors) => {
-          console.log("Cannot log in")
-        })
-      }
+          prenom: prenomUtilisateur,
+          motdepasse: motDePasseUtilisateur
+        };
+        axios
+          .post("/api/login", data)
+          .then(response => {
+            router.push("/dashboardAdmin");
+          })
+          .catch(errors => {
+            router.push("/login");
+          });
+      };
       login();
     }
   }

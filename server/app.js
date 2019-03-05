@@ -52,9 +52,9 @@ app.use(session({
 // app.set("view engine", "ejs");
 
 // middlewares pour admin
-const regleUtilisateurs =require('./middlewares/regleUtilisateurs');
+const regleUtilisateurs = require('./middlewares/regleUtilisateurs');
 app.use(function (req, res, next) {
-regleUtilisateurs.ifLogin(req,res,next);
+    regleUtilisateurs.ifLogin(req, res, next);
 });
 
 //##########################################
@@ -71,32 +71,32 @@ const client = require('./controller/ControllerClient');
 //### FIN PARTIE CONTROLEURS
 //##########################################
 
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
     console.log(req.originalUrl)
     // console.log(req.body)
     next()
-  })
+})
 
 // Page accueil description de l'hotel
-app.get('/api/home',ControllerLogin.accueilGet);
+app.get('/api/home', ControllerLogin.accueilGet);
 
 // Page Chambres disponibles
 app.get('/api/chambres', ControllerChambres.getChambre);
 
 // Vue connection
-app.get('/api/login',ControllerLogin.connexionGet);
+app.get('/api/login', ControllerLogin.connexionGet);
 
 // Envoi des données a partir de la vue connection
-app.post('/api/login',ControllerLogin.connexionPost);
+app.post('/api/login', ControllerLogin.connexionPost);
 
 // Route Formulaire enregistrement
 app.get('/api/enregistrement', utilisateurs.getEnregistrement);
 
 //GROUPE ROUTE UTILISATEUR
-app.get('/api/utilisateurs',utilisateurs.utilisateurGet);
+app.get('/api/utilisateurs', utilisateurs.utilisateurGet);
 
 //Route Formulaire enregistrement
-app.post('/api/utilisateurs',utilisateurs.postEnregistrement);
+app.post('/api/utilisateurs', utilisateurs.postEnregistrement);
 
 //Route Formulaire deleteUser
 app.delete('/api/utilisateurs/:idUtilisateurs', utilisateurs.deleteUser);
@@ -114,22 +114,22 @@ app.get('/api/deconnexion', ControllerLogin.deconnection);
 app.get('/api/admin', crud.ChambresGet);
 
 //Route Formulaire Ajouter chambre
-app.get('/api/admin/ajouter',crud.AjouterChambreGet);
+app.get('/api/admin/ajouter', crud.AjouterChambreGet);
 
 // Route Vue formulaire modifier chambre
-app.get('/api/admin/:id',crud.modifyChambreGet);
+app.get('/api/admin/:id', crud.modifyChambreGet);
 
 // Route insertion de données dans la table chambre
-app.post('/api/admin',crud.ChambresPost);
+app.post('/api/admin', crud.ChambresPost);
 
 // button suppression de chambres
-app.delete('/api/admin/:id',crud.deleteChambre);
+app.delete('/api/admin/:id', crud.deleteChambre);
 
 // insertion modification des données dans la bdd via le formulaire modif
 app.put('/api/admin/:id', crud.modifierChambrePost);
 
 // Vue Chambre : Button voir partie Admin
-app.get('/api/admin/voir/:id',crud.voirChambre);
+app.get('/api/admin/voir/:id', crud.voirChambre);
 
 // Vue pour le formulaire reservation
 app.get('/api/reservation', client.ReservationGet);
@@ -144,7 +144,7 @@ app.get('/api/tarif', client.TarifGet);
 app.get('/api/contact', client.ContactGet);
 
 // Envoi de données de la page contact
-app.post('/api/contact',client.ContactPost);
+app.post('/api/contact', client.ContactPost);
 
 // Vue de la page google map
 app.get('/api/noustrouver', client.NousTrougerGet);
@@ -153,15 +153,15 @@ app.get('/api/noustrouver', client.NousTrougerGet);
 // app.get('/recapitulatif',client.AfficherFacture);
 
 
-app.use(express.static('dist'))  
+app.use(express.static('dist'))
 
 
-app.get("/", (req, res, next) => {  
-  res.sendFile("index.html", { root: publicRoot })
+app.get("/", (req, res, next) => {
+    res.sendFile("index.html", { root: publicRoot })
 })
 
 // on lance l'application sur le port 3000
-const port=process.env.PORT || 3000
-app.listen(port,() => {
-    console.log(`Server running at port `+port);
-    });
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log(`Server running at port ` + port);
+});

@@ -28,7 +28,7 @@ export default {
         axios.post('/api/login', data)
         .then((response) => {
           console.log("logged in")
-          router.push("/dashboard")
+          router.push("/dashboardAdmin")
         })
         .catch((errors) => {
           console.log("Cannot log in")

@@ -12,7 +12,7 @@ function ReservationPost(req, res) {
   }).catch(function(error) {
     console.log(error);
   });
-  // res.redirect('/api/home');
+  res.send('/api/home');
 }
 
 // Vue tarif

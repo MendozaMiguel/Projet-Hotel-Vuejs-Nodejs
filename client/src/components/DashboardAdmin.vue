@@ -49,7 +49,7 @@
         <input name="motdepasse" v-model="user.motdepasse" :type="passwordFieldType">
       </span>
       <button type="button" class="btn btn-success" @click="switchVisibility">Voir mdp</button>
-      <button type="button" class="btn btn-primary" @click="updateUser(user.id)">modifier</button>
+      <button type="button" class="btn btn-primary" @click="updateUser(user.id, user.prenom, user.motdepasse)">modifier</button>
       <!-- <button type="button" class="btn btn-primary" @click="updateUsers(user)">modifier2</button> -->
       <button type="button" class="btn btn-danger pull-right" @click="deleteUser(user.id)">Delete</button>
     </div>
@@ -101,10 +101,10 @@ export default {
           router.push("/login");
         });
     },
-    updateUser: (id) => {
+    updateUser: (id,prenom,motdepasse) => {
       let data = {
-        prenom: this.users.prenom,
-        motDePass: this.users.motdepasse
+        prenom: prenom,
+        motDePass: motdepasse
       };
       console.log(data);
       axios

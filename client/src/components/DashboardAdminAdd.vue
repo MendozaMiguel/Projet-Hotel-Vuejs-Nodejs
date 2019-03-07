@@ -18,14 +18,14 @@ import axios from "axios"
 export default {
   name:"DashboardAdminAdd",
   methods:{
-    // getData: function() {
-    //   axios
-    //     .get("/api/enregistrement")
-    //     .then(response => {
-    //       console.log(response);
-    //     })
-    //     .catch(errors => console.log(errors));
-    // },
+    getData: function() {
+      axios
+        .get("/api/enregistrement")
+        .then(response => {
+          console.log(response);
+        })
+        .catch(errors => console.log(errors));
+    },
     addAdmin:(e)=>{
       e.preventDefault()
       let prenom = e.target.elements.identifiant.value
@@ -40,10 +40,10 @@ export default {
           console.log("Added Admin")
           router.push("/dashboardAdmin")
         })
-        .catch((errors) => {
-          console.log("Cannot add Admin")
-          router.push("/login")
-        })
+        .catch(errors => {
+          console.log(errors);
+          router.push("/login");
+        });
       }
       addAdmin();
     }

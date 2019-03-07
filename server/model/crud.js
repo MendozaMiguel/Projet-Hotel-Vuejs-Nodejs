@@ -11,7 +11,7 @@ function getAll() {
 
 // Ajout des chambres dans la base de données via la requete
 function chambrePost(req,filename){
-    let mesParametres = [req.body.fname,req.body.lname,req.body.email,filename,req.body.phone];
+    let mesParametres = [req.body.name,req.body.description,req.body.price,filename,req.body.category];
     return connSql.then(function(conn){
       let resultat = conn.query("INSERT INTO chambre (name,description,price,image,category) values(?,?,?,?,?)",mesParametres);
       return resultat
@@ -32,7 +32,7 @@ function modifyChambreGet(req) {
 function modifierChambrePost(req,filename){
   let reqUpdate = " UPDATE chambre SET name = ? , description = ? , price = ? , image = ? , category = ? WHERE id = ?";
     return connSql.then(function (conn) {
-      let resultat = conn.query(reqUpdate, [req.body.fname, req.body.lname, req.body.email, filename, req.body.phone, req.params.id]);
+      let resultat = conn.query(reqUpdate, [req.body.name, req.body.description, req.body.price, filename, req.body.category, req.params.id]);
       return resultat
   });
 }

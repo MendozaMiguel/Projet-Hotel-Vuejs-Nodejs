@@ -49,8 +49,11 @@
         <input name="motdepasse" v-model="user.motdepasse" :type="passwordFieldType">
       </span>
       <button type="button" class="btn btn-success" @click="switchVisibility">Voir mdp</button>
-      <button type="button" class="btn btn-primary" @click="updateUser(user.id, user.prenom, user.motdepasse)">modifier</button>
-      <!-- <button type="button" class="btn btn-primary" @click="updateUsers(user)">modifier2</button> -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="updateUser(user.id, user.prenom, user.motdepasse)"
+      >modifier</button>
       <button type="button" class="btn btn-danger pull-right" @click="deleteUser(user.id)">Delete</button>
     </div>
   </div>
@@ -101,9 +104,9 @@ export default {
           router.push("/login");
         });
     },
-    updateUser: (id,prenom,motdepasse) => {
+    updateUser: (id, identifiant, motdepasse) => {
       let data = {
-        prenom: prenom,
+        prenom: identifiant,
         motDePass: motdepasse
       };
       console.log(data);
@@ -116,20 +119,6 @@ export default {
           this.errors.push(e);
         });
     },
-    // updateUsers(user) {
-    //   let data = {
-    //     prenom: this.users.prenom,
-    //     motDePass: this.users.motdepasse
-    //   };
-    //   console.log(data)
-    //   let uri ="/api/utilisateurs/";
-    //   axios
-    //   .put(uri + user.id, data)
-    //   .then(res => {
-    //     console/log(res);
-    //   })
-    //   .catch(e => { console.log(e)})
-    // },
     deleteUser: function(id) {
       console.log("my users" + this.users);
       axios.delete("/api/utilisateurs/" + id).then(response => {

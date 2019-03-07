@@ -18,7 +18,7 @@
               <b-nav-item-dropdown text="Admin" right>
                 <b-dropdown-item :to="{name : 'DashboardAdminAdd'}">Add Admin</b-dropdown-item>
                 <b-dropdown-item :to="{name : 'DashboardAdmin'}">Gestion Admin</b-dropdown-item>
-                <b-dropdown-item href="#">Gestion Chambres</b-dropdown-item>
+                <b-dropdown-item :to="{name: 'DashboardChambre'}">Gestion Chambres</b-dropdown-item>
               </b-nav-item-dropdown>
               <!-- Form for login -->
               <b-nav-item-dropdown text="Sign in" right>
@@ -66,7 +66,7 @@ export default {
   name: "App",
   methods: {
     logout: function(e) {
-      axios.get("/api/logout").then(() => {
+      axios.get("/api/deconnexion").then(() => {
         console.log("logged out");
         router.push("/");
       });

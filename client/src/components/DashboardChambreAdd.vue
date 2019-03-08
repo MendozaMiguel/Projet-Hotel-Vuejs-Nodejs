@@ -9,7 +9,7 @@
       <input type="text" name="prix" placeholder="Prix" id="prix">
       <br>
       <label for="fichier">Choisir l'image:</label>
-      <input type="file" ref="file" name="fichier" id="fichier" v-on:change="handleFileUpload()">
+      <input type="file" ref="file" name="fichier" id="fichier" accept="image/*" v-on:change="handleFileUpload()">
       <br>
       <input type="text" name="categorie" placeholder="categorie" id="categorie">
       <input type="submit" value="addChambre">
@@ -40,9 +40,12 @@ export default {
         .then(response => {
           console.log(response);
         })
-        .catch(errors => console.log(errors));
+        .catch(errors => {
+          router.push("/login");
+        });
     },
-    addChambre: function() {
+    addChambre: function(e) {
+      e.preventDefault();
       let formdata = new FormData();
       let config = {
         header: {
@@ -54,7 +57,9 @@ export default {
       formdata.append("description", e.target.elements.description.value);
       formdata.append("price", e.target.elements.prix.value);
       formdata.append("category", e.target.elements.categorie.value);
+
       console.log(formdata, this.file);
+
       axios
         .post("/api/admin", formdata, config)
         .then(responses => {

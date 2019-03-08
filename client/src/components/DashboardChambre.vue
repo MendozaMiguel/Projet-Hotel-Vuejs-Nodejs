@@ -6,7 +6,7 @@
     <div v-for="chambre in chambres" :key="chambre.id">
       <span>
         ID :
-        {{chambre.id}} - 
+        {{chambre.id}} -
       </span>
       <span>
         Nom :
@@ -22,9 +22,9 @@
       </span>
       <span>
         Image :
-        <input type="text" name="file" id="file" v-model="chambre.image">
-        <!-- <input name="file" type="file" v-model="chambre.image"> -->
-        <!-- <b-form-file accept="image/jpeg, image/png, image/gif" v-model="chambre.image" /> -->
+        <label>{{chambre.image}}</label>
+        <input type="file" name="file" accept="image/*" ref="file">
+        <!-- <img :src="`../../static/chambres/img_${chambre.image}`" :alt=chambre.image height="100" width="100"> -->
       </span>
       <span>
         Categorie :
@@ -59,10 +59,15 @@ export default {
         price: 1,
         image: "nameimage",
         category: 1
-      }
+      },
+      file: ""
     };
   },
   methods: {
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      console.log(">>>> 1st element in files array >>>> ", this.file);
+    },
     getPage: function() {
       axios
         .get("/api/admin")
@@ -84,16 +89,23 @@ export default {
         })
         .catch(errors => console.log(errors));
     },
-    updateChambre: (id, nom, description, prix, categorie) => {
-      let data = {
-        name: nom,
-        description: description,
-        price: prix,
-        category: categorie
+    updateChambre: function(id,nom,description,prix,categorie) {
+      let formdata = new FormData();
+      let config = {
+        header: {
+          "Content-Type": "multipart/form-data"
+        }
       };
-      console.log(data);
+      formdata.set("file", this.file);
+      formdata.set("name", nom);
+      formdata.set("description", description);
+      formdata.set("price", prix);
+      formdata.set("category", categorie);
+
+      console.log(formdata, this.file);
+
       axios
-        .put("/api/admin/" + id, data)
+        .put("/api/admin/" + id, formdata, config)
         .then(response => {
           console.log(response);
         })
